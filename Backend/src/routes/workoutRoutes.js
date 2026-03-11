@@ -1,27 +1,28 @@
-// src/models/Workout.js
-import mongoose from 'mongoose';
+import express from 'express';
 
-const Schema = mongoose.Schema;
+import {
+  getAllWorkouts,
+  getWorkoutById,
+  createWorkout,
+  updateWorkout,
+  deleteWorkout
+} from '../controllers/workoutController.js';
 
-// Schema = regels voor workout
-const workoutSchema = new Schema({
-  title: {
-    type: String,
-    required: true
-  },
-  reps: {
-    type: Number,
-    required: true
-  },
-  load: {
-    type: Number,
-    required: true
-  }
-}, {
-  timestamps: true
-});
+const router = express.Router();
 
-// Model = object voor maken/ophalen/aanpassen/verwijderen
-const Workout = mongoose.model('Workout', workoutSchema);
+// GET alle workouts
+router.get('/', getAllWorkouts);
 
-export default Workout;
+// GET één workout
+router.get('/:id', getWorkoutById);
+
+// POST nieuwe workout
+router.post('/', createWorkout);
+
+// PATCH workout
+router.patch('/:id', updateWorkout);
+
+// DELETE workout
+router.delete('/:id', deleteWorkout);
+
+export default router;
