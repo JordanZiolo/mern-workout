@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import workoutRoutes from './src/routes/workoutRoutes.js';
 import dotenv from 'dotenv';
- 
+ import authRoutes from './src/routes/authRoutes.js'; // Nieuw!
 dotenv.config();
  
 const app = express();
@@ -17,7 +17,7 @@ app.use(express.json());
  
 // routes
 app.use('/api/workouts', workoutRoutes);
- 
+ app.use('/api/auth', authRoutes); // Nieuw!
 // connect DB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
